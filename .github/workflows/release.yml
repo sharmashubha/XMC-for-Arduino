@@ -4,8 +4,8 @@ name: XMC Release workflow
 on:
   push:
     # Sequence of patterns matched against refs/tags
-    tags:
-      - 'v*.*.*' # Push events to matching v*, i.e. v1.0, v20.15.10
+    branches:
+      - master
 
 jobs:
   build:
@@ -39,7 +39,7 @@ jobs:
           asset_name: package_infineon_index.json
           asset_content_type: application/json
       - name: create zip file
-        run: zip -r XMC_For_Arduino${{ github.ref }}.zip . -x ".git/*" ".github/*" 
+        run: zip -r XMC_For_Arduino${{ github.ref }}.zip . -x  ".github/*" 
       - name: Release to Github
         run: echo "Release"
         
