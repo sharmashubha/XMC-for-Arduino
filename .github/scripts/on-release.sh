@@ -26,7 +26,7 @@ RELEASE_ID=`echo $EVENT_JSON | jq -r '.release.id'`
 RELEASE_BODY=`echo $EVENT_JSON | jq -r '.release.body'`
 
 OUTPUT_DIR="$GITHUB_WORKSPACE/build"
-PACKAGE_NAME="XMC_IFX_-$RELEASE_TAG"
+PACKAGE_NAME="XMC-IFX$RELEASE_TAG"
 PACKAGE_JSON_MERGE="$GITHUB_WORKSPACE/.github/scripts/merge_packages.py"
 PACKAGE_JSON_TEMPLATE="$GITHUB_WORKSPACE/package/package_infineon_index.template.json"
 PACKAGE_JSON_REL="package_infineon_index.json"
@@ -231,23 +231,6 @@ if [ $arrLen > 3 ] && [ "${msgArray[0]:0:3}" == "tag" ]; then
         fi
         let ind=$ind+1
     done
-fi
-
-# Append Commit Messages
-if [ ! -z "$COMMITS_SINCE_RELEASE" ] && [ "$COMMITS_SINCE_RELEASE" != "null" ]; then
-    echo "Getting commits since $COMMITS_SINCE_RELEASE ..."
-    commitFile=$OUTPUT_DIR/commits.txt
-    git -C "$GITHUB_WORKSPACE" log --oneline $COMMITS_SINCE_RELEASE.. > "$OUTPUT_DIR/commits.txt"
-    releaseNotes+=$'\r\n##### Commits\r\n'
-    IFS=$'\n'
-    for next in `cat $commitFile`
-    do
-        IFS=' ' read -r commitId commitMsg <<< "$next"
-        commitLine="- [$commitId](https://github.com/$GITHUB_REPOSITORY/commit/$commitId) $commitMsg"
-        releaseNotes+="$commitLine"
-        releaseNotes+=$'\r\n'
-    done
-    rm -f $commitFile
 fi
 
 # Prepend the original release body
