@@ -49,17 +49,17 @@ def main(args):
     tools = {}
     platforms = {} 
     pkg1 = load_package(args[1])
-    print("pkg1 is printed", pkg1);
+    
     tools = merge_objects(tools, pkg1['tools']);
-    print("tools merged is printed", tools);
+   
     platforms = merge_objects(platforms, pkg1['platforms']);
-    print("platforms merged is printed", platforms);
+    
     pkg2 = load_package(args[2])
-    print("pkg2 is printed", pkg1);
+    
     tools = merge_objects(tools, pkg2['tools']);
-    print("tools merged is printed", tools);
+    
     platforms = merge_objects(platforms, pkg2['platforms']);
-    print("platforms merged is printed", platforms);
+    
 
     pkg1['tools'] = []
     pkg1['platforms'] = []
