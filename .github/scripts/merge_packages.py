@@ -70,7 +70,7 @@ def main(args):
                 
     print(json.dumps(pkg1, indent=4, sort_keys=True))
     print(json.dumps(pkg2, indent=4, sort_keys=True))
-    pkg1['platforms'] = sorted(pkg1['platforms'], key=lambda k: LooseVersion(pkgVersionNormalized(k['version'])), reverse=True)
+    
 
 
     json.dump({'packages':[pkg1]}, sys.stdout, indent=2)
