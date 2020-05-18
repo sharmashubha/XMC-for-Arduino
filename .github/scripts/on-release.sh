@@ -159,10 +159,9 @@ jq_arg=".packages[0].platforms[0].version = \"$RELEASE_TAG\" | \
     .packages[0].platforms[0].checksum = \"SHA-256:$PACKAGE_SHA\""
 
 # Generate package JSONs
-if [ "$RELEASE_PRE" == "false" ]; then
-    echo "Genarating $PACKAGE_JSON_REL ..."
-    cat "$PACKAGE_JSON_TEMPLATE" | jq "$jq_arg" > "$OUTPUT_DIR/$PACKAGE_JSON_REL"
-fi
+echo "Genarating $PACKAGE_JSON_REL ..."
+cat "$PACKAGE_JSON_TEMPLATE" | jq "$jq_arg" > "$OUTPUT_DIR/$PACKAGE_JSON_REL"
+
 
 # Figure out the last release or pre-release
 echo "Getting previous releases ..."

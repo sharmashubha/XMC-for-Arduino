@@ -68,7 +68,8 @@ def main(args):
             print("Adding platform {0}-{1}".format(name, version), file=sys.stderr)
             pkg1['platforms'].append(platforms[name][version])
                 
-    pkg1['platforms'] = sorted(pkg1['platforms'], key=lambda k: LooseVersion(pkgVersionNormalized(k['version'])), reverse=True)
+    print(json.dumps(pkg1, indent=4, sort_keys=True))
+    print(json.dumps(pkg2, indent=4, sort_keys=True))
 
     json.dump({'packages':[pkg1]}, sys.stdout, indent=2)
 
